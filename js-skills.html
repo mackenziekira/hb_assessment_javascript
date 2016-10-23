@@ -401,7 +401,7 @@
       alert('genius!');
     }
     else if (guess > randNum) {
-      alert('wut r u smoking. too high.');
+      alert('sugar sugar how you get so high? try lower!');
       checkGuess(randNum);
     }
     else if (guess < randNum) {
@@ -541,6 +541,7 @@
       for (var i = 2; i < candidate; i++) {
         if (candidate % i === 0) {
           candidate = candidate + 1;
+          // i = 2;
           continue;
         }
       }
@@ -557,7 +558,6 @@
         prime_array.shift();
         generatePrime();
       }
-      console.log(prime_array);
       displayPrimes();
     }
 
