@@ -358,7 +358,14 @@
 
 <script>
   "use strict";
-  // put your code here
+  
+  function beAgreeable(evt) {
+    evt.preventDefault();
+    $('#agreeable-text').html("I'm a fan of " + $('#favorite-food-input').val() + ", too!");
+  }
+
+  $('#agreeable-form').on('submit', beAgreeable);
+
 </script>
 
 <div class="hint">
@@ -388,7 +395,28 @@
 
 <script>
   "use strict";
-  // put your code here
+  function checkGuess(randNum) {
+    var guess = parseInt(prompt('What is my number?'));
+    if (guess === randNum) {
+      alert('genius!');
+    }
+    else if (guess > randNum) {
+      alert('wut r u smoking. too high.');
+      checkGuess(randNum);
+    }
+    else if (guess < randNum) {
+      alert('shorty got too low. try higher!');
+      checkGuess(randNum);
+    }
+  }
+  
+  function playGame() {
+    var randNum = Math.floor((Math.random() * 100) + 1);
+    checkGuess(randNum);
+  }
+
+  $('#play-guessing-game').on('click', playGame);
+
 </script>
 
 <div class="hint">
@@ -429,7 +457,38 @@
 
 <script>
   "use strict";
-  // put your code here
+  
+  function gameLogic (evt) {
+    evt.preventDefault();
+    var randNum = evt.data.randNum;
+    var guess = parseInt($('#number-guessed').val());
+    if (guess === randNum) {
+      $('#number-guessing-msg').html('smartypants! your mom must be proud of you.');
+      $('#number-guessed').prop('disabled', true);
+      $('#try-this-number').prop('disabled', true);
+      $('#play-guessing-game-2').prop('disabled', false);
+      $('#number-guessed').val('');
+    }
+    else if (guess > randNum) {
+      $('#number-guessing-msg').html("cause baby there ain't no mountain high enough! except when there is. too high, try again pls.");
+    }
+    else if (guess < randNum) {
+      $('#number-guessing-msg').html("ain't no valley low enough to hold that low number! guess higher!");
+    }
+  }
+  
+  function gameSetup () {
+    var randNum = Math.floor((Math.random() * 100) + 1);
+    console.log(randNum);
+    $('#number-guessing-msg').html('');
+    $('#number-guessed').prop('disabled', false);
+    $('#try-this-number').prop('disabled', false);
+    $('#play-guessing-game-2').prop('disabled', true);
+    $('#guessing-game-2-form').on('submit', {randNum: randNum}, gameLogic);
+  }
+
+  $('#play-guessing-game-2').on('click', gameSetup);
+
 </script>
 
 
