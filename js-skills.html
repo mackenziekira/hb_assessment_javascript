@@ -520,8 +520,48 @@
   "use strict";
 
     var PRIME_COLORS = ['orange', 'midnightblue', 'darkgoldenrod', 'green', 'purple'];
+    var prime_array = [2];
 
-  // put the rest of your code here
+    function composeText() {
+        var base = '<div class="prime-box" style="background-color: ';
+        var text_string = "<div>";
+        for (var i = 0; i < prime_array.length; i++) {
+          text_string = text_string + base + PRIME_COLORS[i] + '">' + prime_array[i] + '</div>'
+        }
+        return text_string + '</div>';
+    }
+
+    function displayPrimes() {
+      var text = composeText();
+      $('#prime-box-area').html(text);
+    }
+
+    function generatePrime() {
+      var candidate = prime_array[prime_array.length - 1] + 1;
+      for (var i = 2; i < candidate; i++) {
+        if (candidate % i === 0) {
+          candidate = candidate + 1;
+          continue;
+        }
+      }
+      prime_array.push(candidate);
+    }
+
+    function examineArray () {
+      if (prime_array.length === 1) {
+        while (prime_array.length < 5) {
+          generatePrime();
+        }
+      }
+      else if (prime_array.length === 5) {
+        prime_array.shift();
+        generatePrime();
+      }
+      console.log(prime_array);
+      displayPrimes();
+    }
+
+    $('#make-prime-boxes').on('click', examineArray);
 </script>
 
 
